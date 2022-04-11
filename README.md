@@ -1,1 +1,2 @@
-MyShopEcommerce
+# MyShop
+My Shop eCommerce Demo
