@@ -94,15 +94,15 @@ namespace MyShop.Services
             basketContext.Commit();
         }
 
-        public void RemoveFromBasket(HttpContextBase httpContext, string productId)
+        public void RemoveFromBasket(HttpContextBase httpContext, string itemId)
         {
             Basket basket = GetBasket(httpContext, true);
-            BasketItem item = basket.BasketItems.FirstOrDefault(i => i.ProductId == productId);
+            BasketItem item = basket.BasketItems.FirstOrDefault(i => i.Id == itemId);
 
             if (item != null)
             {
                 basket.BasketItems.Remove(item);
-                basket.BasketItems.Add(item);
+                basketContext.Commit();
             }
         }
 
@@ -148,7 +148,7 @@ namespace MyShop.Services
                                         join p in productContext.Collections() on item.ProductId equals p.Id
                                         select item.Quanity * p.Price).Sum();
 
-                model.BasketItems = basketCount ?? 0;
+                model.BasketCount = basketCount ?? 0;
                 model.BasketTotal = basketTotal ?? decimal.Zero;
             }
 
