@@ -20,6 +20,11 @@ namespace MyShop.WebUI.Controllers
             this.context = producContext;
             this.productCategories = productCategoryContext;
         }
+
+        public HomeController()
+        {
+        }
+
         public ActionResult Index(string Category = null)
         {
             List<Product> products;
